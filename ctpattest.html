@@ -1,0 +1,1215 @@
+<!doctype html>
+<html>
+<meta charset="UTF-8">
+<header>
+
+<title>CTPAT Questionaire</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <script>
+       //this is for the progress bar
+ //"use strict";
+   var $ = function(id) { return document.getElementById(id); };
+
+       function update() {
+    var checked = 0;
+    var myBar = document.getElementById("myBar");
+    //Reference the Form.
+    var fruits = document.getElementById("fruits");
+    //Reference all the CheckBoxes in Table.
+    boxes = fruits.querySelectorAll("input[type='radio']:checked");
+    checked = boxes.length
+  myBar.style.width = ((checked / 11) * 100) + "%";
+    if (checked == 0) {
+      alert("Please Fill out CTPAT form.");
+    } else{
+       var percent= parseInt(((checked/11)*100))+"% Complete";
+       //percent.style.color="white";
+       //percent=parseInt(percent);
+       document.getElementById("myBar").innerHTML=percent; 
+      signatures();
+
+    }
+
+  return true;
+  }
+  checks = document.querySelectorAll("input[type='radio']");
+  checks.forEach(function(box) {
+    box.addEventListener("change", function(e) {
+        update();
+    });
+  });
+  
+function signatures(){
+   var fruits = document.getElementById("fruits");
+    //Reference all the CheckBoxes in Table.
+    boxes = fruits.querySelectorAll("input[type='radio']:checked");
+    checked = boxes.length
+    pct=parseInt(((checked/11)*100));
+   //console.log(pct);
+   if (pct===100){
+      document.getElementById('sign').style.display = 'block';
+         
+      }else{
+         document.getElementById('sign').style.display = 'none';
+   }
+      agreement();
+   //if (percent === "100% Complete"){
+   //   alert("complete");
+   //}
+}
+function agreement(){
+   var sig=document.getElementById('signature');
+   var role=document.getElementById('role');
+   var chbx=document.getElementById('chkbox');
+   if(sig===''&& role===''&&chbx.checked==false){
+//chkbox
+   }
+   else{
+      document.getElementById('sub').style.display='block';
+   }
+}
+    </script>
+
+    <script type="text/javascript">
+       //checks if 98 is marked yes and then unhide the upload file portion
+         function uploadchk(){
+      if(document.getElementById("cb98y").checked){
+         //console.log("alert should go off")
+         // WORK ON QUESTIONS THAT SKIP BASED ON ANSWER ASKED RENAE IF OTHER ANSWERS SHOULD BE DISABLED
+         document.getElementById('upld').style.display = 'block';
+         alert("Question 98 was answerd Yes. Please provide supporting documents that supports this answer.\n Please use the 'choose file' button below to add it.");
+      }else{
+         document.getElementById('upld').style.display = 'none';
+         
+      }
+   };
+   //checks the skipped questions
+      function questionchk(){
+      if($('cb19n').checked){
+         $('cb20na').checked = true;
+         $('cb20y').disabled=true;
+         $('cb20n').disabled=true;
+         $('cb21na').checked = true;
+         $('cb21y').disabled=true;
+         $('cb21n').disabled=true;
+
+      }else{
+         $('cb20na').checked = false;
+         $('cb20y').disabled=false;
+         $('cb20n').disabled=false;
+         $('cb21na').checked = false;
+         $('cb21y').disabled=false;
+         $('cb21n').disabled=false;
+      }
+      if($('cb34n').checked){//34 no 35 skip
+         $('cb35na').checked=true;
+         $('cb35n').disabled=true;
+         $('cb35y').disabled=true;
+      }else {
+         $('cb35na').checked=false;
+         $('cb35n').disabled=false;
+         $('cb35y').disabled=false;
+      }
+            //44 no 45 46 47 skip
+      if($('cb44n').checked){
+         $('cb45na').checked=true;
+         $('cb46na').checked=true;
+         $('cb47na').checked=true;
+         $('cb45n').disabled=true;
+         $('cb45y').disabled=true;
+         $('cb46n').disabled=true;
+         $('cb46y').disabled=true;
+         $('cb47n').disabled=true;
+         $('cb47y').disabled=true;
+      }else{
+         $('cb45na').checked=false;
+         $('cb46na').checked=false;
+         $('cb47na').checked=false;
+         $('cb45n').disabled=false;
+         $('cb45y').disabled=false;
+         $('cb46n').disabled=false;
+         $('cb46y').disabled=false;
+         $('cb47n').disabled=false;
+         $('cb47y').disabled=false;
+      }
+      //83 no 84 skip
+      if($('cb83n').checked){
+         $('cb84na').checked=true;
+         $('cb84n').disabled=true;
+         $('cb84y').disabled=true;
+      }else{
+         $('cb84na').checked=false;
+         $('cb84n').disabled=false;
+         $('cb84y').disabled=false;
+      }
+      //85 no 86 skip
+      if($('cb85n').checked){
+         $('cb86na').checked=true;
+         $('cb86n').disabled=true;
+         $('cb86y').disabled=true;
+      }else{
+
+         $('cb86na').checked=false;
+         $('cb86n').disabled=false;
+         $('cb86y').disabled=false;
+      }
+   };
+
+    </script>
+   <script>
+      //this it calculating score
+   </script>
+
+
+</header>
+
+<body>
+    <img class="pic" src="images/cb-1.png">
+
+
+
+     
+    <div id="myProgress">
+      <div id="myBar"></div>
+    </div>
+
+<!--<script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>-->
+<!--<script>
+function exportReportToExcel() {
+   let table = document.getElementsByTagName("table"); // you can use document.getElementById('tableId') as well by providing id to the table tag
+   TableToExcel.convert(table[0], { // html code may contain multiple tables so here we are refering to 1st table tag
+     name: `export.xlsx`, // fileName you could use any name
+     sheet: {
+       name: 'Sheet 1' // sheetName
+     }
+   });
+ }
+</script>-->
+<script>
+   window.onload = function(){
+   var today= new Date();
+   $("cn").focus();
+   document.getElementById("date").value=today.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);  
+   };
+</script>
+<div><input id="ws" type="text"disabled></div><div><input id="qs" type="text" disabled></div><div><input id="as" type="text"disabled></div>
+
+</div><br><br>
+<label for="companyname" id="cn">Manufacturer Name (in English):</label><input type="text" id="companyname" required><br>
+<label for="busadd" id="ba">Manufacturer Address Line 1(in English):</label><input type="text" id="busadd" required><br>
+<label for="busadd" id="ba">Manufacturer Address Line 2(in English):</label><input type="text" id="busadd" required><br>
+<label for="busadd" id="ba">Manufacturer Address Line 3(in English):</label><input type="text" id="busadd" ><br>
+<label for="ctry" id="ctry">City</label><input type="text" id="ctry" required>&nbsp;
+<label for="ctry" id="ctry">Province</label><input type="text" id="ctry" required>&nbsp;
+<label for="ctry" id="ctry">Country</label><input type="text" id="ctry" required>
+<label for="date" id="d">Date:</label><input type="text" id="date"disabled><br><br>
+     <div id="here"></div>
+
+   <form id="fruits" name="ccform">
+   <div class="section1">
+<table class="tbl">
+    <tr>
+   <th id="sections" rowspan="29" style="transform: rotate(270deg);font-size:20pt;">Container Security</th>
+    <th>Number</th>
+    <th>Question</th>
+    <th>Yes</th>
+    <th>No</th>
+    <th>N/A</th>
+
+    </tr>
+       
+
+    <tr>
+        <td class="num">1</td>
+        <td class="qstn">Do you verify the physical integrity of the container structure prior to stuffing or loading? The inspection of the container is intended to identify the presence of false walls or 
+            other tampering with the container designed to facilitate unauthorized access to the container after it leaves your facility.
+            你們在裝櫃前是否對集裝箱实体完整性做整體檢查？對集裝箱的檢查旨在確定是否存在假的箱壁或其他改裝，以便於在集裝箱離開您的工廠設施後，確保沒有經過授權的進入集裝箱的現象發生。</td>
+         <td class="cb"><label><input type="radio" id="cb1y" onchange="update()" onclick="questionchk()" class="yes" name="1" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb1n" onchange="update()" onclick="questionchk()" class="no" name="1" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb1na" onchange="update()" onclick="questionchk()" class="na" name="1" ></label></td>
+        </tr> 
+
+     <tr>
+        <td class="num">2</td>
+        <td class="qstn">Does the inspection of the physical integrity of the container examine the following seven-points of the container’s structure to ensure they have not been modified to conceal contraband 
+            or have been contaminated with agricultural pests?  (Please answer questions 3-9) 是否檢查集裝箱实体的完整性和集裝箱結構的以下七個點，以確保它沒有經過改裝和隱藏裝運過違禁品或被農業害蟲污染？</td>
+            <td class="cb"><label><input type="radio" id="cb2y" onchange="update()" onclick="questionchk()" class="yes" name="2" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb2n" onchange="update()" onclick="questionchk()" class="no" name="2" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb2na" onchange="update()" onclick="questionchk()" class="na" name="2" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">3</td>
+        <td class="qstn">Front wall (to detect any false walls and if applicable the fan housing on refrigerated containers) 檢查集裝箱的前壁/如果適用，對冷藏室的風扇罩進行檢查 </td>
+        <td class="cb"><label><input type="radio" id="cb3y" onchange="update()" onclick="questionchk()" class="yes" name="3" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb3n" onchange="update()" onclick="questionchk()" class="no" name="3" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb3na" onchange="update()" onclick="questionchk()" class="na" name="3" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">4</td>
+        <td class="qstn">Left side  檢查集裝箱的左壁</td>
+        <td class="cb"><label><input type="radio" id="cb4y" onchange="update()" onclick="questionchk()" class="yes" name="4" value=5></label></td>
+        <td class="cb"><label><input type="radio" id="cb4n" onchange="update()" onclick="questionchk()" class="no" name="4" value=5></label></td>
+        <td class="cb"><label><input type="radio" id="cb4na" onchange="update()" onclick="questionchk()" class="na" name="4" ></label></td>
+        
+     </tr> 
+     <tr>
+        <td class="num">5</td>
+        <td class="qstn">Right side  檢查集裝箱的右壁</td>
+        <td class="cb"><label><input type="radio" id="cb5y" onchange="update()" onclick="questionchk()" class="yes" name="5" value=5></label></td>
+        <td class="cb"><label><input type="radio" id="cb5n" onchange="update()" onclick="questionchk()" class="no" name="5" value=5></label></td>
+        <td class="cb"><label><input type="radio" id="cb5na" onchange="update()" onclick="questionchk()" class="na" name="5" ></label></td>
+
+     </tr> 
+     <tr>
+        <td class="num">6</td>
+        <td class="qstn">Floor  檢查集裝箱的地板</td>
+        <td class="cb"><label><input type="radio" id="cb6y" onchange="update()" onclick="questionchk()" class="yes" name="6" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb6n" onchange="update()" onclick="questionchk()" class="no" name="6" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb6na" onchange="update()" onclick="questionchk()" class="na" name="6" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">7</td>
+        <td class="qstn">Ceiling/Roof  檢查集裝箱的頂部</td>
+        <td class="cb"><label><input type="radio" id="cb7y" onchange="update()" onclick="questionchk()" class="yes" name="7" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb7n" onchange="update()" onclick="questionchk()" class="no" name="7" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb7na" onchange="update()" onclick="questionchk()" class="na" name="7" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">8</td>
+        <td class="qstn">Inside/outside doors (including the reliability of the locking mechanisms of the doors,    handles, rods, hasps, rivets, brackets, and all other parts of a containers locking mechanisms)
+            檢查集裝箱的內/外門, 包括門的密封性，把手，杆子，搭扣，鉚釘，支架以及集裝箱的所有密封的任何其它一個部位  </td>
+         <td class="cb"><label><input type="radio" id="cb8y" onchange="update()" onclick="questionchk()" class="yes" name="8" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb8n" onchange="update()" onclick="questionchk()" class="no" name="8" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb8na" onchange="update()" onclick="questionchk()" class="na" name="8" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">9</td>
+        <td class="qstn">Outside/undercarriage  檢查集裝箱的外部/底架</td>
+        <td class="cb"><label><input type="radio" id="cb9y" onchange="update()" onclick="questionchk()" class="yes" name="9" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb9n" onchange="update()" onclick="questionchk()" class="no" name="9" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb9na" onchange="update()" onclick="questionchk()" class="na" name="9" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">10</td>
+        <td class="qstn">After the container is stuffed or loaded do you affix a seal to the container?  集裝箱裝箱後是否使用封條封箱?</td>
+        <td class="cb"><label><input type="radio" id="cb10y" onchange="update()" onclick="questionchk()" class="yes" name="10" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb10n" onchange="update()" onclick="questionchk()" class="no" name="10" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb10na" onchange="update()" onclick="questionchk()" class="na" name="10" ></label></td>
+     </tr> 
+     <!--<tr><td></td><td>During the container inspection process, do you use a checklist to show the following:  (Please     answer questions 11-15)  檢查集裝箱的過程中，是否使用檢查表上的以下內容</td></tr>
+     <tr>
+        <td class="num">11</td>
+        <td class="qstn">Container / Trailers # / IIT (Instrument of International Traffic) 集裝箱/拖車號/ IIT（國際運輸工具）號</td>
+        <td class="cb"><label><input type="radio" id="cb11y" onchange="update()" onclick="questionchk()" class="yes" name="11" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb11n" onchange="update()" onclick="questionchk()" class="no" name="11" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb11na" onchange="update()" onclick="questionchk()" class="na" name="11" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">12</td>
+        <td class="qstn">Date of Inspection檢查日期</td>
+        <td class="cb"><label><input type="radio" id="cb12y" onchange="update()" onclick="questionchk()" class="yes" name="12" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb12n" onchange="update()" onclick="questionchk()" class="no" name="12" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb12na" onchange="update()" onclick="questionchk()" class="na" name="12" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">13</td>
+        <td class="qstn">Time of Inspection檢查時間</td>
+        <td class="cb"><label><input type="radio" id="cb13y" onchange="update()" onclick="questionchk()" class="yes" name="13" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb13n" onchange="update()" onclick="questionchk()" class="no" name="13" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb13na" onchange="update()" onclick="questionchk()" class="na" name="13" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">14</td>
+        <td class="qstn">Name of the employee conducting the inspection進行檢查的員工姓名</td>
+        <td class="cb"><label><input type="radio" id="cb14y" onchange="update()" onclick="questionchk()" class="yes" name="14" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb14n" onchange="update()" onclick="questionchk()" class="no" name="14" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb14na" onchange="update()" onclick="questionchk()" class="na" name="14" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">15</td>
+        <td class="qstn">Specific areas of the IIT that were inspected  檢查的IIT的特定區域</td>
+        <td class="cb"><label><input type="radio" id="cb15y" onchange="update()" onclick="questionchk()" class="yes" name="15" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb15n" onchange="update()" onclick="questionchk()" class="no" name="15" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb15na" onchange="update()" onclick="questionchk()" class="na" name="15" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">16</td>
+        <td class="qstn">Does a supervisor sign off on the checklist when the inspection is completed?  檢查完成後，主管是否在檢查清單上簽字</td>
+        <td class="cb"><label><input type="radio" id="cb16y" onchange="update()" onclick="questionchk()" class="yes" name="16" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb16n" onchange="update()" onclick="questionchk()" class="no" name="16" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb16na" onchange="update()" onclick="questionchk()" class="na" name="16" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">17</td>
+        <td class="qstn">Does the seal meet or exceed the PAS ISO 17712 standards for high security seals?  所有封條必須符合或超出現行 ISO17712 對高度安全封條的標準</td>
+        <td class="cb"><label><input type="radio" id="cb17y" onchange="update()" onclick="questionchk()" class="yes" name="17" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb17n" onchange="update()" onclick="questionchk()" class="no" name="17" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb17na" onchange="update()" onclick="questionchk()" class="na" name="17" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">18</td>
+        <td class="qstn">Who provides the seals to you? 封條由誰提供？（寫明提供者）</td>
+        <td class="cb"><label><input type="radio" id="cb18y" onchange="update()" onclick="questionchk()" class="yes" name="18" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb18n" onchange="update()" onclick="questionchk()" class="no" name="18" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb18na" onchange="update()" onclick="questionchk()" class="na" name="18" ></label></td>
+     </tr>
+     <tr>
+        <td class="num">19</td>
+        <td class="qstn">Do you maintain an inventory of seals?  是否有封條的存貨記錄？將封條由專人拿在手上或者放在     安全的別人無法接觸到的地方
+         If yes, please answer question 20-21, if no please skip to question 22.  如果有，請回答問題20-21，如果沒有，請跳到問題22</td>
+         <td class="cb"><label><input type="radio" id="cb19y" onchange="update()" onclick="questionchk()" class="yes" name="19" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb19n" onchange="update()" onclick="questionchk()" class="no" name="19" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb19na" onchange="update()" onclick="questionchk()" class="na" name="19" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">20</td>
+        <td class="qstn">Do you record the seal numbers in a written record upon receipt of a new shipment?  記錄封條號
+         /集裝箱號     收到新的貨物後，有沒有把封條號碼書面記錄下來?</td>
+         <td class="cb"><label><input type="radio" id="cb20y" onchange="update()" onclick="questionchk()" class="yes" name="20" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb20n" onchange="update()" onclick="questionchk()" class="no" name="20" value=5></label></td>
+         <td class="cb"><label><input type="radio" id="cb20na" onchange="update()" onclick="questionchk()" class="na" name="20" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">21</td>
+        <td class="qstn">When seals are used, do you record seal numbers with the container numbers on a written log,on the shipping documents, 
+           and on your internal records? 您是否將封條號與集裝箱號一起書面記錄下來，包括運輸單據和內部記錄等</td>
+           <td class="cb"><label><input type="radio" id="cb21y" onchange="update()" onclick="questionchk()" class="yes" name="21" value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb21n" onchange="update()" onclick="questionchk()" class="no" name="21"value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb21na" onchange="update()" onclick="questionchk()" class="na" name="21" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">22</td>
+        <td class="qstn">Do you have written procedures to control access to the seals? 對封條有所控制，避免不必要的接觸     有否書面程式來控制對封條的接觸和獲取？</td>
+         <td class="cb"><label><input type="radio" id="cb22y" onchange="update()" onclick="questionchk()" class="yes" name="22" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb22n" onchange="update()" onclick="questionchk()" class="no" name="22"value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb22na" onchange="update()" onclick="questionchk()" class="na" name="22" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">23</td>
+        <td class="qstn">Do you have written procedures regarding the correct method to affix the seal to the container?  有否書面程式規定對封條的管理以及如何貼到裝有貨物的集裝箱上？</td>
+           <td class="cb"><label><input type="radio" id="cb23y" onchange="update()" onclick="questionchk()" class="yes" name="23" value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb23n" onchange="update()" onclick="questionchk()" class="no" name="23"value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb23na" onchange="update()" onclick="questionchk()" class="na" name="23" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">24</td>
+        <td class="qstn">Do you take digital pictures of the properly installed seal at the point of stuffing and share them with the consignee for verification purposes?
+             是否在填寫點對正確安裝的封條進行數碼拍照，並把它一起分享給收貨人以供核對</td>
+            <td class="cb"><label><input type="radio" id="cb24y" onchange="update()" onclick="questionchk()" class="yes" name="24" value=10></label></td>
+            <td class="cb"><label><input type="radio" id="cb24n" onchange="update()" onclick="questionchk()" class="no" name="24"value=10></label></td>
+            <td class="cb"><label><input type="radio" id="cb24na" onchange="update()" onclick="questionchk()" class="na" name="24" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">25</td>
+        <td class="qstn">Do you conduct a periodic audit of the stored seals and reconciliation against seal inventory logs and shipping documents? 
+            All audits must be documented. 您是否定期對存儲的封條進行審核，並根據封條庫存日期和裝運單據進行核對？所有審核必須記錄在案。</td>
+            <td class="cb"><label><input type="radio" id="cb25y" onchange="update()" onclick="questionchk()" class="yes" name="25" value=10></label></td>
+            <td class="cb"><label><input type="radio" id="cb25n" onchange="update()" onclick="questionchk()" class="no" name="25"value=10></label></td>
+            <td class="cb"><label><input type="radio" id="cb25na" onchange="update()" onclick="questionchk()" class="na" name="25" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">26</td>
+        <td class="qstn">Do you store containers in a secure area to prevent unauthorized access and/or tampering? 集裝箱是否存放在安全區域以避免未經許可的人員進入？</td>
+         <td class="cb"><label><input type="radio" id="cb26y" onchange="update()" onclick="questionchk()" class="yes" name="26" value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb26n" onchange="update()" onclick="questionchk()" class="no" name="26"value=10></label></td>
+         <td class="cb"><label><input type="radio" id="cb26na" onchange="update()" onclick="questionchk()" class="na" name="26" ></label></td>
+     </tr> 
+     <tr>
+        <td class="num">27</td>
+        <td class="qstn">Do you have written procedures to report unauthorized entry into containers or container storage areas to local law enforcement officials?
+             是否有書面流程報告和解決未經許可擅自進入集裝箱/拖車或集裝箱/拖車的存放區域的程式？</td>
+           <td class="cb"><label><input type="radio" id="cb27y" onchange="update()" onclick="questionchk()" class="yes" name="27" value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb27n" onchange="update()" onclick="questionchk()" class="no" name="27"value=10></label></td>
+           <td class="cb"><label><input type="radio" id="cb27na" onchange="update()" onclick="questionchk()" class="na" name="27" ></label></td>
+     </tr> -->
+<!--
+            
+          <tr>
+            <th id="sections" rowspan="20" style="transform:rotate(270deg);font-size:20pt;">Physical Security</th>
+             <td class="num">28</td>
+             <td class="qstn">Are all buildings constructed of materials that resist unlawful entry and protect against outside 
+intrusion? 廠區是否封閉的，安裝有實體障礙物以阻止人員未經許可進入？</td>
+             <td class="cb"><label><input type="radio" id="cb28y" onchange="update()" onclick="questionchk()" class="yes" name="28" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb28n" onchange="update()" onclick="questionchk()" class="no" name="28" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb28na" onchange="update()" onclick="questionchk()" class="na" name="28" disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">29</td>
+             <td class="qstn"> Are cargo handling and storage facilities enclosed by fencing? 貨物搬運和存放設施的區域四周是
+否用圍欄包圍起來？</td>
+             <td class="cb"><label><input type="radio" id="cb29y" onchange="update()" onclick="questionchk()" class="yes" name="29" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb29n" onchange="update()" onclick="questionchk()" class="no" name="29" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb29na" onchange="update()" onclick="questionchk()" class="na" name="29" disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">30</td>
+             <td class="qstn">Are the gates, through which vehicles enter cargo handling and storage facilities manned and/or 
+monitored at all times when the facility is open? 在車輛進入進行貨物裝卸和儲存時，廠區大門是
+否有人值守和/或即時監控？</td>
+             <td class="cb"><label><input type="radio" id="cb30y" onchange="update()" onclick="questionchk()" class="yes" name="30" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb30n" onchange="update()" onclick="questionchk()" class="no" name="30" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb30na" onchange="update()" onclick="questionchk()" class="na" name="30"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">31</td>
+             <td class="qstn">Do you have a policy that notifies individuals that they and their vehicles may be subject to 
+search in accordance with local and labor laws? 您是否有一項政策會通知到個人，他們及其車輛
+可能會根據當地法律和勞工法被進行搜查</td>
+             <td class="cb"><label><input type="radio" id="cb31y" onchange="update()" onclick="questionchk()" class="yes" name="31" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb31n" onchange="update()" onclick="questionchk()" class="no" name="31" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb31na" onchange="update()" onclick="questionchk()" class="na" name="31"disabled></label></td>
+
+          </tr>    
+          <tr>
+             <td class="num">32</td>
+             <td class="qstn">Are the entrance gates closed and locked when the facility is closed? 當工廠下班時，所有門要關
+上並上鎖</td>
+             <td class="cb"><label><input type="radio" id="cb32y" onchange="update()" onclick="questionchk()" class="yes" name="32" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb32n" onchange="update()" onclick="questionchk()" class="no" name="32" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb32na" onchange="update()" onclick="questionchk()" class="na" name="32"disabled></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">33</td>
+             <td class="qstn">Do you have written procedures to report unauthorized entry into the facility to local law 
+enforcement officials? 是否有書面流程報告和解決未經許可擅自進入廠區或裝箱區域的程式</td>
+             <td class="cb"><label><input type="radio" id="cb33y" onchange="update()" onclick="questionchk()" class="yes" name="33" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb33n" onchange="update()" onclick="questionchk()" class="no" name="33" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb33na" onchange="update()" onclick="questionchk()" class="na" name="33"disabled></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">34</td>
+             <td class="qstn"> Do you use video surveillance cameras to monitor the entrances to the facility and the cargo 
+handling and storage / inspection areas? If yes, please answer question 35. If no, please skip to 
+question 36. 有監控設備 您是否使用視頻監控攝像機監控工廠設施入口以及貨物裝卸和儲存/檢
+查區域？如果有，請回答問題 35。如果沒有，請跳到問題 36。</td>
+             <td class="cb"><label><input type="radio" id="cb34y" onchange="update()" onclick="questionchk()" class="yes" name="34" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb34n" onchange="update()" onclick="questionchk()" class="no" name="34" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb34na" onchange="update()" onclick="questionchk()" class="na" name="34"disabled></label></td>
+
+          </tr> 
+         <tr>
+             <td class="num">35</td>
+             <td class="qstn"> Do you store the tapes for a period of time before reusing them? If yes, how long (90-120 days)? 
+監控錄影帶必須是否被儲存一段時間？ 有的話，會是多久？ （90-120 天嗎)?</td>
+             <td class="cb"><label><input type="radio" id="cb35y" onchange="update()" onclick="questionchk()" class="yes" name="35" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb35n" onchange="update()" onclick="questionchk()" class="no" name="35" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb35na" onchange="update()" onclick="questionchk()" class="na" name="35"></label></td>
+          </tr> 
+          <tr>
+             <td class="num">36</td>
+             <td class="qstn"> Do you have periodic, random reviews of the camera footage to verify that cargo security 
+procedures are being properly followed and maintained for a minimum of 2 years for audit 
+purposes? 您是否對攝像機鏡頭進行了定期的隨機檢查，以驗證貨物安全程式是否得到適當遵
+守，並至少維持 2 年，以供審核之用？</td>
+             <td class="cb"><label><input type="radio" id="cb36y" onchange="update()" onclick="questionchk()" class="yes" name="36" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb36n" onchange="update()" onclick="questionchk()" class="no" name="36" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb36na" onchange="update()" onclick="questionchk()" class="na" name="36"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">37</td>
+             <td class="qstn">Is the facility equipped with an alarm system to monitor the entrances to the facility? 工廠是否配
+備了報警系統來監控工廠的入口？</td>
+             <td class="cb"><label><input type="radio" id="cb37y" onchange="update()" onclick="questionchk()" class="yes" name="37" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb37n" onchange="update()" onclick="questionchk()" class="no" name="37" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb37na" onchange="update()" onclick="questionchk()" class="na" name="37"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">38</td>
+             <td class="qstn">Is there adequate lighting inside and outside the facility, including parking areas, fence lines, 
+entrances and exits, and cargo handling and storage /inspection areas? 工廠設施內外是否有足
+夠的照明，包括停車區、圍欄區、出入口、貨物裝卸和儲存/檢查區？</td>
+             <td class="cb"><label><input type="radio" id="cb38y" onchange="update()" onclick="questionchk()" class="yes" name="38" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb38n" onchange="update()" onclick="questionchk()" class="no" name="38" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb38na" onchange="update()" onclick="questionchk()" class="na" name="38"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">39</td>
+             <td class="qstn"> Are locking devices used to secure external and internal doors, windows, gates and fences? 是
+否所有外部和內部的門，窗，圍欄都有鎖閉裝置以確保安全？</td>
+             <td class="cb"><label><input type="radio" id="cb39y" onchange="update()" onclick="questionchk()" class="yes" name="39" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb39n" onchange="update()" onclick="questionchk()" class="no" name="39" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb39na" onchange="update()" onclick="questionchk()" class="na" name="39"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">40</td>
+             <td class="qstn">Do management and/or security personnel control the issuance of keys? 管理人員或安全人員是
+否控制所有的鑰匙的發放？</td>
+             <td class="cb"><label><input type="radio" id="cb40y" onchange="update()" onclick="questionchk()" class="yes" name="40" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb40n" onchange="update()" onclick="questionchk()" class="no" name="40" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb40na" onchange="update()" onclick="questionchk()" class="na" name="40"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">41</td>
+             <td class="qstn">Are employee / visitor vehicles prohibited from parking in or adjacent to cargo handling and storage 
+areas? 是否 禁止員工/訪客車輛停放在貨物裝卸和存儲區中或附近？</td>
+             <td class="cb"><label><input type="radio" id="cb41y" onchange="update()" onclick="questionchk()" class="yes" name="41" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb41n" onchange="update()" onclick="questionchk()" class="no" name="41" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb41na" onchange="update()" onclick="questionchk()" class="na" name="41"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">42</td>
+             <td class="qstn"> Do you segregate high-value and/or dangerous cargo in a secure area within the warehouse or 
+storage yard? 是否在倉庫或堆場內的安全區域隔離高價值和/或危險貨物？</td>
+             <td class="cb"><label><input type="radio" id="cb42y" onchange="update()" onclick="questionchk()" class="yes" name="42" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb42n" onchange="update()" onclick="questionchk()" class="no" name="42" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb42na" onchange="update()" onclick="questionchk()" class="na" name="42"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">43</td>
+             <td class="qstn">Do you have a communication system to contact internal security personnel and/or local law 
+enforcement authorities? 是否有通讯系统联系内部安保人员和/或当地執法機關？</td>
+             <td class="cb"><label><input type="radio" id="cb43y" onchange="update()" onclick="questionchk()" class="yes" name="43" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb43n" onchange="update()" onclick="questionchk()" class="no" name="43" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb43na" onchange="update()" onclick="questionchk()" class="na" name="43"disabled></label></td>
+
+          </tr>
+          <tr>
+             <td class="num">44</td>
+             <td class="qstn">Do you use Security Technology for physical security? If yes, please answer question 45-47, if no 
+please skip to question 48. 您是否使用安全技術來實現实体安全. 如果是，請回答問題 45-47，如
+果不是，請跳到問題 48</td>
+             <td class="cb"><label><input type="radio" id="cb44y" onchange="update()" onclick="questionchk()" class="yes" name="44" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb44n" onchange="update()" onclick="questionchk()" class="no" name="44" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb44na" onchange="update()" onclick="questionchk()" class="na" name="44"disabled></label></td>
+          </tr> 
+          <tr>
+             <td class="num">45</td>
+             <td class="qstn">Do you have written policies and procedures governing the use, maintenance, and protection of 
+security technology? 您是否有管理安全技術的使用，維護和保護的書面政策和程式
+ These policies must: 這些政策必須包括：
+                a. Limit access to the locations of controls / hardware for security devices; 限制對安全設備控制
+項/硬體位置的訪問
+b. Procedures to test / inspect the technology on a regular basis; 定期測試/檢查技術的程式
+c. Inspections include verification that equipment is correctly positioned and/or working properly; 
+檢查包括驗證設備是否正確放置和/或正常工作
+d. Document the results of the inspections and performance testing; 記錄檢查和性能測試的結果
+e. If corrective actions are warranted, implement and document the actions taken; 如果需要採
+取糾正措施，請實施和並記錄採取的措施
+f. Documented results must be maintained for a sufficient time for audit purposes. 記錄結果必
+須保留足夠的時間以用於審核</td>
+             <td class="cb"><label><input type="radio" id="cb45y" onchange="update()" onclick="questionchk()" class="yes" name="45" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb45n" onchange="update()" onclick="questionchk()" class="no" name="45" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb45na" onchange="update()" onclick="questionchk()" class="na" name="45"></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">46</td>
+             <td class="qstn">Do you have a written agreement with third-party (off-site) security monitoring resources in place, 
+stipulating critical systems functionality and authentication protocols, such as (but not limited to) 
+security code changes, adding or subtracting authorized personnel, password revision(s), and 
+systems access or denial(s)? 您是否已與協力廠商（異地）安全監視資源達成書面協議，規定了
+關鍵的系統功能和身份驗證協議，例如（但不限於）更改安全代碼，添加或減少授權人員，密碼修
+改（以及系統訪問或拒絕</td>
+             <td class="cb"><label><input type="radio" id="cb46y" onchange="update()" onclick="questionchk()" class="yes" name="46" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb46n" onchange="update()" onclick="questionchk()" class="no" name="46" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb46na" onchange="update()" onclick="questionchk()" class="na" name="46" ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">47</td>
+             <td class="qstn">Are security technology policies and procedures reviewed at least annually and updated as risk 
+circumstances change? 是否至少每年審查一次安全技術政策和程式，並隨著風險情況的變化進行
+更新</td>
+             <td class="cb"><label><input type="radio" id="cb47y" onchange="update()" onclick="questionchk()" class="yes" name="47" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb47n" onchange="update()" onclick="questionchk()" class="no" name="47" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb47na" onchange="update()" onclick="questionchk()" class="na" name="47"></label></td>
+
+          </tr> 
+
+          <tr>
+            <th id="sections" rowspan="11" style="transform:rotate(270deg);font-size:20pt;">Access Controls</th>
+             <td class="num">48</td>
+             <td class="qstn">Do you have an employee identification system which provides for the positive identification of 
+employees before they can enter the facility? 是否有員工身份識別系統，在員工進入工廠設施
+前提供員工的身份識別？</td>
+             <td class="cb"><label><input type="radio" id="cb48y" onchange="update()" onclick="questionchk()" class="yes" name="48" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb48n" onchange="update()" onclick="questionchk()" class="no" name="48" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb48na" onchange="update()" onclick="questionchk()" class="na" name="48"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">49</td>
+             <td class="qstn">Do employees have access only to those areas in which they perform their duties? 員工是否只能
+進入其履行職責的區域？</td>
+             <td class="cb"><label><input type="radio" id="cb49y" onchange="update()" onclick="questionchk()" class="yes" name="49" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb49n" onchange="update()" onclick="questionchk()" class="no" name="49" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb49na" onchange="update()" onclick="questionchk()" class="na" name="49"disabled ></label></td>
+          </tr> 
+          <tr>
+             <td class="num">50</td>
+             <td class="qstn">Do management and/or security personnel control the issuance of employee, visitor and vendor 
+identification badges? 管理人员和/或安全人員是否控制員工、訪客和供應商識別牌（需要有編
+號）的發放？</td>
+             <td class="cb"><label><input type="radio" id="cb50y" onchange="update()" onclick="questionchk()" class="yes" name="50" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb50n" onchange="update()" onclick="questionchk()" class="no" name="50" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb50na" onchange="update()" onclick="questionchk()" class="na" name="50" disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">51</td>
+             <td class="qstn">Are visitors required to present photo identification upon arrival? 是否要求來訪者提供具有照片的
+識別證件？</td>
+             <td class="cb"><label><input type="radio" id="cb51y" onchange="update()" onclick="questionchk()" class="yes" name="51" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb51n" onchange="update()" onclick="questionchk()" class="no" name="51" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb51na" onchange="update()" onclick="questionchk()" class="na" name="51"disabled ></label></td>
+          </tr>    
+          <tr>
+             <td class="num">52</td>
+             <td class="qstn">Are visitors required to visibly display a temporary identification badge while on the premises? 是
+否 要求來訪者帶上能夠被識別的來訪者牌？</td>
+             <td class="cb"><label><input type="radio" id="cb52y" onchange="update()" onclick="questionchk()" class="yes" name="52" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb52n" onchange="update()" onclick="questionchk()" class="no" name="52" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb52na" onchange="update()" onclick="questionchk()" class="na" name="52"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">53</td>
+             <td class="qstn">Are visitors escorted at all times by company personnel while on the premises? 是否 要求來訪者
+由公司人員全程陪同？</td>
+             <td class="cb"><label><input type="radio" id="cb53y" onchange="update()" onclick="questionchk()" class="yes" name="53" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb53n" onchange="update()" onclick="questionchk()" class="no" name="53" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb53na" onchange="update()" onclick="questionchk()" class="na" name="53"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">54</td>
+             <td class="qstn">Are vendors and other delivery personnel required to present photo identification upon arrival? 是
+否要求供應商及送貨者出示帶有照片的身份證或其他身份證明？</td>
+             <td class="cb"><label><input type="radio" id="cb54y" onchange="update()" onclick="questionchk()" class="yes" name="54" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb54n" onchange="update()" onclick="questionchk()" class="no" name="54" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb54na" onchange="update()" onclick="questionchk()" class="na" name="54" disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">55</td>
+             <td class="qstn"> Are arriving packages and mail periodically screened before delivery within the company? 到達的
+包裹和郵件是否在公司內部定期檢查？</td>
+             <td class="cb"><label><input type="radio" id="cb55y" onchange="update()" onclick="questionchk()" class="yes" name="55" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb55n" onchange="update()" onclick="questionchk()" class="no" name="55" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb55na" onchange="update()" onclick="questionchk()" class="na" name="55" disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">56</td>
+             <td class="qstn">Do you have identification procedures for all employees, visitors and vendors at all points of entry? 
+在所有入口處，是否有針對所有員工、訪客和供應商的身份識別程式？ </td>
+             <td class="cb"><label><input type="radio" id="cb56y" onchange="update()" onclick="questionchk()" class="yes" name="56" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb56n" onchange="update()" onclick="questionchk()" class="no" name="56" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb56na" onchange="update()" onclick="questionchk()" class="na" name="56"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">57</td>
+             <td class="qstn">Do you have written policies and procedures for security guards and periodically verify 
+compliance with these work instructions and policies through audits, policy reviews, and 
+ simulated exercises? 您是否為安保人員制定了書面制度和程式，並通過審核，制度審查和模擬演
+練定期驗證對這些工作說明和政策的遵守情況</td>
+             <td class="cb"><label><input type="radio" id="cb57y" onchange="update()" onclick="questionchk()" class="yes" name="57" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb57n" onchange="update()" onclick="questionchk()" class="no" name="57" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb57na" onchange="update()" onclick="questionchk()" class="na" name="57"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">58</td>
+             <td class="qstn">Do you have procedures to challenge unauthorized/unidentified persons and to report problems 
+to local law enforcement officials? 有否質詢未經許可進入人員或者身份不明人員和报告问题的程
+式？</td>
+             <td class="cb"><label><input type="radio" id="cb58y" onchange="update()" onclick="questionchk()" class="yes" name="58" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb58n" onchange="update()" onclick="questionchk()" class="no" name="58" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb58na" onchange="update()" onclick="questionchk()" class="na" name="58" disabled></label></td>
+
+          </tr> 
+
+          <tr>
+            <th id="sections" rowspan="16" style="transform:rotate(270deg);font-size:20pt;">Procedural Security</th>
+             <td class="num">59</td>
+             <td class="qstn">Do you have a designated security officer to supervise the loading of cargo into containers, 
+trailers and railcars? 有否指定安全部門人員監管裝貨（集裝箱，拖車，等）？</td>
+             <td class="cb"><label><input type="radio" id="cb59y" onchange="update()" onclick="questionchk()" class="yes" name="59" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb59n" onchange="update()" onclick="questionchk()" class="no" name="59" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb59na" onchange="update()" onclick="questionchk()" class="na" name="59"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">60</td>
+             <td class="qstn"> Do you verify the quantity and identity of goods against the purchase order prior to shipment? 是
+否按訂單核對所裝貨物和數量？</td>
+             <td class="cb"><label><input type="radio" id="cb60y" onchange="update()" onclick="questionchk()" class="yes" name="60" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb60n" onchange="update()" onclick="questionchk()" class="no" name="60" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb60na" onchange="update()" onclick="questionchk()" class="na" name="60"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">61</td>
+             <td class="qstn">Do you have procedures to resolve discrepancies prior to shipment? 是否有在裝運前處理不符點
+的程式嗎</td>
+             <td class="cb"><label><input type="radio" id="cb61y" onchange="update()" onclick="questionchk()" class="yes" name="61" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb61n" onchange="update()" onclick="questionchk()" class="no" name="61" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb61na" onchange="update()" onclick="questionchk()" class="na" name="61"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">62</td>
+             <td class="qstn">Do you track the timeliness of incoming and outgoing cargo movements? 是否建立跟蹤進出貨物
+及時動向的程式？</td>
+             <td class="cb"><label><input type="radio" id="cb62y" onchange="update()" onclick="questionchk()" class="yes" name="62" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb62n" onchange="update()" onclick="questionchk()" class="no" name="62" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb62na" onchange="update()" onclick="questionchk()" class="na" name="62"disabled ></label></td>
+
+          </tr>    
+          <tr>
+             <td class="num">63</td>
+             <td class="qstn">Do you maintain a written log recording the identity of the driver, positively identifying the driver, 
+and the container number of the cargo picked up? 您是否保留書面記錄記錄駕駛員的身份，正確
+識別駕駛員以及所提取貨物的集裝箱號</td>
+             <td class="cb"><label><input type="radio" id="cb63y" onchange="update()" onclick="questionchk()" class="yes" name="63" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb63n" onchange="update()" onclick="questionchk()" class="no" name="63" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb63na" onchange="update()" onclick="questionchk()" class="na" name="63"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">64</td>
+             <td class="qstn">Do you have procedures to ensure that all information related to our orders is protected against 
+loss or the introduction of erroneous information? 是否有程式確保與我方訂單有關的所有資訊不
+受損失或導入錯誤資訊的影響？</td>
+             <td class="cb"><label><input type="radio" id="cb64y" onchange="update()" onclick="questionchk()" class="yes" name="64" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb64n" onchange="update()" onclick="questionchk()" class="no" name="64" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb64na" onchange="update()" onclick="questionchk()" class="na" name="64"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">65</td>
+             <td class="qstn">Do you have procedures to ensure that all shipping documents are legible, complete and accurate? 
+是否有程式確保所有裝運單據清晰、完整和準確？</td>
+             <td class="cb"><label><input type="radio" id="cb65y" onchange="update()" onclick="questionchk()" class="yes" name="65" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb65n" onchange="update()" onclick="questionchk()" class="no" name="65" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb65na" onchange="update()" onclick="questionchk()" class="na" name="65"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">66</td>
+             <td class="qstn">Are your computer systems and the information stored on them protected against unauthorized 
+access? 電腦系統和存儲的資訊是否受保護，以防未經授權的訪問？</td>
+             <td class="cb"><label><input type="radio" id="cb66y" onchange="update()" onclick="questionchk()" class="yes" name="66" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb66n" onchange="update()" onclick="questionchk()" class="no" name="66" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb66na" onchange="update()" onclick="questionchk()" class="na" name="66"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">67</td>
+             <td class="qstn">Do you have procedures to notify U.S. Customs and/or local law enforcement officials when
+anomalies or illegal activities are suspected? 當發現有異常，非法或可疑活動，是否有程式通知
+美國海關或當地的執法機關</td>
+             <td class="cb"><label><input type="radio" id="cb67y" onchange="update()" onclick="questionchk()" class="yes" name="67" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb67n" onchange="update()" onclick="questionchk()" class="no" name="67" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb67na" onchange="update()" onclick="questionchk()" class="na" name="67"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">68</td>
+             <td class="qstn">Do you have a statement of support to protect your supply chain from criminal activities such 
+as drug trafficking, terrorism, human smuggling and illegal contraband that is it signed by a 
+company official and displayed on company bulletin boards? 您是否有由公司官員簽名並在公司
+公告板上的聲明，以保護您的供應鏈免受犯罪活動（例如販毒，恐怖主義，走私和非法違禁品）的
+危害</td>
+             <td class="cb"><label><input type="radio" id="cb68y" onchange="update()" onclick="questionchk()" class="yes" name="68" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb68n" onchange="update()" onclick="questionchk()" class="no" name="68" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb68na" onchange="update()" onclick="questionchk()" class="na" name="68"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">69</td>
+             <td class="qstn">Do you have a Supply Chain Security Program that includes many departments, such as 
+Security, Human Resources, Information Technology and Import/Export offices to create a crossfunctional team focused on your company’s Supply Chain Security? 您是否有一個包括許多部門
+（例如安全，人力資源，資訊技術和進出口辦公室）的供應鏈安全計畫，以創建一個專注於您公司
+的供應鏈安全的跨職能團隊</td>
+             <td class="cb"><label><input type="radio" id="cb69y" onchange="update()" onclick="questionchk()" class="yes" name="69" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb69n" onchange="update()" onclick="questionchk()" class="no" name="69" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb69na" onchange="update()" onclick="questionchk()" class="na" name="69"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">70</td>
+             <td class="qstn">Do you have a multi-level audit system, in verifiable format, that tests your security programs with 
+checks, balances and accountability in mind to ensure the program operates as planned? 您是
+否具有可驗證格式的多級審核系統，該系統在考慮安全性，檢查餘額和問責制的情況下測試您的安
+全程式，以確保該程式按計劃進行</td>
+             <td class="cb"><label><input type="radio" id="cb70y" onchange="update()" onclick="questionchk()" class="yes" name="70" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb70n" onchange="update()" onclick="questionchk()" class="no" name="70" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb70na" onchange="update()" onclick="questionchk()" class="na" name="70"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">71</td>
+             <td class="qstn">Do you have written procedures in place that addresses crisis management, business continuity, 
+security recovery plans and business resumption? 您是否已制定解決危機管理，業務連續性，安
+全恢復計畫和業務恢復的書面程式并实施</td>
+             <td class="cb"><label><input type="radio" id="cb71y" onchange="update()" onclick="questionchk()" class="yes" name="71" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb71n" onchange="update()" onclick="questionchk()" class="no" name="71" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb71na" onchange="update()" onclick="questionchk()" class="na" name="71"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">72</td>
+             <td class="qstn">Do you have written procedures to separate and secure domestic cargo from International cargo 
+in warehouse or pre-staging areas? 是否有書面程式將國內貨物與國際貨物分開存放，並確保其
+安全？</td>
+             <td class="cb"><label><input type="radio" id="cb72y" onchange="update()" onclick="questionchk()" class="yes" name="72" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb72n" onchange="update()" onclick="questionchk()" class="no" name="72" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb72na" onchange="update()" onclick="questionchk()" class="na" name="72"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">73</td>
+             <td class="qstn">Do you inspect cargo staging areas, and the immediate surrounding areas on a regular basis to 
+ensure these areas remain free of visible pest contamination? 您是否定期檢查貨物裝卸區域和附
+近區域，以確保這些區域沒有可見的蟲害污染？</td>
+             <td class="cb"><label><input type="radio" id="cb73y" onchange="update()" onclick="questionchk()" class="yes" name="73" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb73n" onchange="update()" onclick="questionchk()" class="no" name="73" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb73na" onchange="update()" onclick="questionchk()" class="na" name="73"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">74</td>
+             <td class="qstn">Do you have written procedures to prevent pest contamination & include Wood Packaging 
+Materials (WPM) regulations under the International Plant Protection Convention’s (IPPC) 
+International Standards for Phytosanitary Measures No, 15 (ISPM 15)? 您是否制定了防止有害生
+物蟲害污染的書面程式，並根據國際植物保護公約（IPPC）第 15 號植物檢疫措施國際標準
+（ISPM 15）納入了木質包裝材料（WPM）法規</td>
+             <td class="cb"><label><input type="radio" id="cb74y" onchange="update()" onclick="questionchk()" class="yes" name="74" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb74n" onchange="update()" onclick="questionchk()" class="no" name="74" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb74na" onchange="update()" onclick="questionchk()" class="na" name="74" disabled></label></td>
+
+          </tr>     
+
+          <tr>
+            <th id="sections" rowspan="13" style="transform:rotate(270deg);font-size:20pt;">Information Technology Security</th>
+             <td class="num">75</td>
+             <td class="qstn">Do you use individually assigned accounts for personnel to access your information technology 
+systems based on job requirements? 是否個人在工作需要時使用電腦的時候會使用各自的密碼登
+錄</td>
+             <td class="cb"><label><input type="radio" id="cb75y" onchange="update()" onclick="questionchk()" class="yes" name="75" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb75n" onchange="update()" onclick="questionchk()" class="no" name="75" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb75na" onchange="update()" onclick="questionchk()" class="na" name="75"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">76</td>
+             <td class="qstn">Do you require users to periodically change the passwords used to access your information 
+technology systems? 是否要求定期更改密碼進入資訊技術系統？</td>
+             <td class="cb"><label><input type="radio" id="cb76y" onchange="update()" onclick="questionchk()" class="yes" name="76" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb76n" onchange="update()" onclick="questionchk()" class="no" name="76" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb76na" onchange="update()" onclick="questionchk()" class="na" name="76"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">77</td>
+             <td class="qstn">Do you use firewalls to protect your information technology systems from unauthorized access 
+from the internet? 是否使用防火牆來保護您的資訊技術系統阻止來自互聯網的未經授權的訪問？</td>
+             <td class="cb"><label><input type="radio" id="cb77y" onchange="update()" onclick="questionchk()" class="yes" name="77" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb77n" onchange="update()" onclick="questionchk()" class="no" name="77" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb77na" onchange="update()" onclick="questionchk()" class="na" name="77"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">78</td>
+             <td class="qstn">Do you have a system to identify the abuse of your information technology systems including 
+the improper access, tampering or altering of business data? ? 是否有一個系統來識別您的資訊
+技術系統的濫用，包括不正確的訪問、篡改或更改業務資料？</td>
+             <td class="cb"><label><input type="radio" id="cb78y" onchange="update()" onclick="questionchk()" class="yes" name="78" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb78n" onchange="update()" onclick="questionchk()" class="no" name="78" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb78na" onchange="update()" onclick="questionchk()" class="na" name="78"disabled ></label></td>
+
+          </tr>    
+          <tr>
+             <td class="num">79</td>
+             <td class="qstn">If using a network system, do you regularly test the security of your IT infrastructure? 如果使用網
+絡系統，您是否定期測試 IT 基礎架構的安全性</td>
+             <td class="cb"><label><input type="radio" id="cb79y" onchange="update()" onclick="questionchk()" class="yes" name="79" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb79n" onchange="update()" onclick="questionchk()" class="no" name="79" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb79na" onchange="update()" onclick="questionchk()" class="na" name="79"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">80</td>
+             <td class="qstn">Do you have policies and procedures on Cybersecurity, and do they address how information is 
+shared based on cybersecurity threats with the Government and other business partners on an 
+annual basis? 是否有網路安全方面的政策和程式，以及這些政策和程式是否涉及如何根據網路安
+全威脅每年與政府和其他商業夥伴共用資訊？</td>
+             <td class="cb"><label><input type="radio" id="cb80y" onchange="update()" onclick="questionchk()" class="yes" name="80" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb80n" onchange="update()" onclick="questionchk()" class="no" name="80" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb80na" onchange="update()" onclick="questionchk()" class="na" name="80"disabled ></label></td>
+
+          </tr>  
+          <tr>
+             <td class="num">81</td>
+             <td class="qstn">Do you allow your personnel to connect remotely to your network via a virtual private network 
+(VPN)? If yes, please answer question 82, if no, skip to question 83. 是否允許您的人員通過虛擬
+私人網路絡（VPN）遠端連接到您的網路？ 如果是，請回答問題 82；否則，請跳至問題 83</td>
+             <td class="cb"><label><input type="radio" id="cb81y" onchange="update()" onclick="questionchk()" class="yes" name="81" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb81n" onchange="update()" onclick="questionchk()" class="no" name="81" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb81na" onchange="update()" onclick="questionchk()" class="na" name="81"disabled ></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">82</td>
+             <td class="qstn">If you use a VPN, do you have procedures designed to secure remote access from unauthorized 
+users? 如果您使用 VPN，是否有專門針對未經授權的使用者進行遠端存取的安全程式？ </td>
+             <td class="cb"><label><input type="radio" id="cb82y" onchange="update()" onclick="questionchk()" class="yes" name="82" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb82n" onchange="update()" onclick="questionchk()" class="no" name="82" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb82na" onchange="update()" onclick="questionchk()" class="na" name="82" disabled></label></td>
+
+          </tr>
+          <tr>
+             <td class="num">83</td>
+             <td class="qstn">Do you allow employees to use personal devices to conduct company work? if yes, please 
+answer question 84, if no, skip to question 85. 您是否允許員工使用個人設備進行公司工作, 如果
+是，請回答問題 84；如果否，請跳到問題 85</td>
+             <td class="cb"><label><input type="radio" id="cb83y" onchange="update()" onclick="questionchk()" class="yes" name="83" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb83n" onchange="update()" onclick="questionchk()" class="no" name="83" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb83na" onchange="update()" onclick="questionchk()" class="na" name="83"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">84</td>
+             <td class="qstn">If you allow employees to use personal devices to conduct company work, do you have policies 
+and procedures to include regular security updates and a method to securely access the 
+company’s network? 如果您允許員工使用個人設備來進行公司工作，是否有包括定期安全更新的
+政策和程式以及安全訪問公司網路的方法？</td>
+             <td class="cb"><label><input type="radio" id="cb84y" onchange="update()" onclick="questionchk()" class="yes" name="84" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb84n" onchange="update()" onclick="questionchk()" class="no" name="84" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb84na" onchange="update()" onclick="questionchk()" class="na" name="84"></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">85</td>
+             <td class="qstn">Do your cybersecurity policies and procedures include measures to prevent the use of counterfeit 
+or improperly licensed technological products? 您的網絡安全政策和程式是否包括防止使用假冒
+或不正當授權的技術產品的措施 ？</td>
+             <td class="cb"><label><input type="radio" id="cb85y" onchange="update()" onclick="questionchk()" class="yes" name="85" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb85n" onchange="update()" onclick="questionchk()" class="no" name="85" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb85na" onchange="update()" onclick="questionchk()" class="na" name="85"disabled></label></td>
+
+          </tr> 
+          <tr>
+             <td class="num">86</td>
+             <td class="qstn">How often is your data backed up and is your data stored in an encrypted format offsite of your 
+facility? 您的數據多久備份一次，數據是否以加密格式存儲在工廠外？</td>
+             <td class="cb"><label><input type="radio" id="cb86y" onchange="update()" onclick="questionchk()" class="yes" name="86" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb86n" onchange="update()" onclick="questionchk()" class="no" name="86" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb86na" onchange="update()" onclick="questionchk()" class="na" name="86"></label></td>
+
+          </tr> 
+         <tr>
+             <td class="num">87</td>
+             <td class="qstn"> Do you regularly account for your IT inventory and is it properly sanitized and/or destroyed in 
+accordance with the National Institute of Standards and Technology (NIST) Guidelines for Media 
+Sanitization or other appropriate industry guidelines? 您是否定期核查您的 IT 庫存，並根據美國
+國家標準技術研究院（NIST）媒體消毒指南或其他適當的行業指南對其進行了適當的消毒和/或銷
+毀</td>
+             <td class="cb"><label><input type="radio" id="cb87y" onchange="update()" onclick="uploadchk()" class="yes" name="87" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb87n" onchange="update()" onclick="uploadchk()" class="no" name="87" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb87na" onchange="update()" onclick="uploadchk()" class="na" name="87"disabled ></label></td>
+          </tr> 
+
+          <tr>
+            <th id="sections" rowspan="5" style="transform:rotate(270deg);font-size:20pt;">Personnel Security</th>
+             <td class="num">88</td>
+             <td class="qstn">Do you conduct pre-employment screening and background checks on prospective employees? 
+是否對未來雇員進行職前篩選和背景調查？</td>
+             <td class="cb"><label><input type="radio" id="cb88y" onchange="update()" onclick="uploadchk()" class="yes" name="88" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb88n" onchange="update()" onclick="uploadchk()" class="no" name="88" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb88na" onchange="update()" onclick="uploadchk()" class="na" name="88"disabled></label></td>
+          </tr> 
+          <tr>
+             <td class="num">89</td>
+             <td class="qstn">Do you verify the information provided by job applicants, including employment history and 
+references? 是否核實求職者提供的資訊，包括工作經歷和推薦信？</td>
+             <td class="cb"><label><input type="radio" id="cb89y" onchange="update()" onclick="uploadchk()" class="yes" name="89" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb89n" onchange="update()" onclick="uploadchk()" class="no" name="89" value=5></label></td>
+             <td class="cb"><label><input type="radio" id="cb89na" onchange="update()" onclick="uploadchk()" class="na" name="89"disabled></label></td>
+          </tr> 
+          <tr>
+             <td class="num">90</td>
+             <td class="qstn">Do you have procedures to report and manage problems related to personnel security? 是否有報
+告和管理與人員安全有關的問題的程式？</td>
+             <td class="cb"><label><input type="radio" id="cb90y" onchange="update()" onclick="uploadchk()" class="yes" name="90" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb90n" onchange="update()" onclick="uploadchk()" class="no" name="90" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb90na" onchange="update()" onclick="uploadchk()" class="na" name="90"disabled></label></td>
+          </tr> 
+          <tr>
+             <td class="num">91</td>
+             <td class="qstn">Do you periodically conduct background checks on current employees based on cause and/or 
+the sensitivity of the employee’s position? 是否定期根據原因和/或員工職位的敏感性對現有員工
+進行背景調查？</td>
+             <td class="cb"><label><input type="radio" id="cb91y" onchange="update()" onclick="uploadchk()" class="yes" name="91" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb91n" onchange="update()" onclick="uploadchk()" class="no" name="91" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb91na" onchange="update()" onclick="uploadchk()" class="na" name="91"disabled ></label></td>
+          </tr>    
+          <tr>
+             <td class="num">92</td>
+             <td class="qstn">Do you have procedures to remove identification badges and to deny facility and information
+systems access for terminated employees? 是否有程式對於離職的員工必須有去除身份證明標
+誌，禁止和進入工廠設施和資訊系統</td>
+             <td class="cb"><label><input type="radio" id="cb92y" onchange="update()" onclick="uploadchk()" class="yes" name="92" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb92n" onchange="update()" onclick="uploadchk()" class="no" name="92" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb92na" onchange="update()" onclick="uploadchk()" class="na" name="92" disabled></label></td>
+          </tr>  
+
+            
+          <tr>
+            <th id="sections" rowspan="3" style="transform:rotate(270deg);font-size:20pt;">Employee Education Awareness</th>
+             <td class="num">93</td>
+             <td class="qstn">Do you have or plan to have a security awareness program to educate employees to recognize 
+internal conspiracies, maintain cargo integrity and to identify and address security issues? 是否
+有或計畫制定安全意識計畫，教育員工識別內部陰謀，維護貨物完整性，並識別和解決安全問題？</td>
+             <td class="cb"><label><input type="radio" id="cb93y" onchange="update()" onclick="uploadchk()" class="yes" name="93" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb93n" onchange="update()" onclick="uploadchk()" class="no" name="93" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb93na" onchange="update()" onclick="uploadchk()" class="na" name="93"disabled ></label></td>
+          </tr> 
+          <tr>
+             <td class="num">94</td>
+             <td class="qstn">Does the security awareness program encourage and reward employees for active participation 
+in security programs? 安全意識計畫是否鼓勵並獎勵到員工積極參與其中</td>
+             <td class="cb"><label><input type="radio" id="cb94y" onchange="update()" onclick="uploadchk()" class="yes" name="94" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb94n" onchange="update()" onclick="uploadchk()" class="no" name="94" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb94na" onchange="update()" onclick="uploadchk()" class="na" name="94"disabled ></label></td>
+          </tr> 
+          <tr>
+             <td class="num">95</td>
+             <td class="qstn">Do you require personnel who operate and manage security technology systems to have 
+received specialized training on the system’s operation and maintenance? 您是否要求操作和管
+理安全技術系統的人員接受有關系統的操作和維護的專門培訓？</td>
+             <td class="cb"><label><input type="radio" id="cb95y" onchange="update()" onclick="uploadchk()" class="yes" name="95" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb95n" onchange="update()" onclick="uploadchk()" class="no" name="95" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb95na" onchange="update()" onclick="uploadchk()" class="na" name="95" disabled></label></td>
+          </tr>   <br><br> <br>        
+          <tr>
+            <th id="sections" rowspan="3" style="transform:rotate(270deg);font-size:20pt;">Threat Awareness & Verification</th>
+             <td class="num">96</td>
+             <td class="qstn">Do you have or plan to have a threat awareness program established and maintained by security 
+personnel and designed to recognize and foster awareness of the threat posed by money 
+laundering and terrorism financing activities? 是否有或計畫有一個由安全人員建立和維持的威脅
+意識計畫，旨在確認和促進對洗錢和資助恐怖主義活動構成的威脅的認識？</td>
+             <td class="cb"><label><input type="radio" id="cb96y" onchange="update()" onclick="uploadchk()" class="yes" name="96" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb96n" onchange="update()" onclick="uploadchk()" class="no" name="96" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb96na" onchange="update()" onclick="uploadchk()" class="na" name="96"disabled></label></td>
+          </tr> 
+          <tr>
+            
+             <td class="num">97</td>
+             <td class="qstn">Are the specific procedures identified in this questionnaire response maintained in a verifiable 
+format? 本問卷的回復是否有程式以可驗證的格式保存？</td>
+             <td class="cb"><label><input type="radio" id="cb97y" onchange="update()" onclick="uploadchk()" class="yes" name="97" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb97n" onchange="update()" onclick="uploadchk()" class="no" name="97" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb97na" onchange="update()" onclick="uploadchk()" class="na" name="97"disabled></label></td>
+          </tr> -->
+          <tr>
+             <td class="num">98</td>
+             <td class="qstn">. Have you obtained a certification in a supply chain security program by a foreign Customs 
+               Administration? 您是否已獲得外國海關管理局的供應鏈安全計畫認證？
+                If so, please provide your status of participation here and include a copy of your certificate with 
+               your response to this questionnaire. 如果是，請在此處提供您的參與情況，並在回答本問卷時附
+               上證書副本</td>
+             <td class="cb"><label><input type="radio" id="cb98y" onchange="update()" onclick="uploadchk()" class="yes" name="98" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb98n" onchange="update()" onclick="uploadchk()" class="no" name="98" value=10></label></td>
+             <td class="cb"><label><input type="radio" id="cb98na" onchange="update()" onclick="uploadchk()" class="na" name="98"disabled></label></td>
+          </tr>
+           
+     </table>
+   </div></div></form>
+</div>
+<div id="upld" style="display:none">
+   <input type="file" required>
+</div><br><br>
+<div id="sign" style="display:none">
+<label for="signature">Signature:</label><input type="text" id="signature" required><br>
+<label for="role">Title:</label><input type="text" id="role" role required><br>
+<label for="agree">Checking this box agrees all the information above is true and the signature is of a valid Manager within the company.</label><input id='chkbox'type="checkbox" required>
+</div>
+<script>
+
+
+
+</script>
+
+
+<br><br><br>
+<div id="sub" style="display:none">
+<button id="exportbtn1" class="Submit" onClick="calculatescores()">submit</button>
+</div>
+<br><br><br><br><br><br><br>
+
+</body>
+<br><br><br><br>
+
+
+<script>
+   
+   /*console.log($('cb19y').value);
+   console.log($('cb20y').value);
+   console.log($('cb21y').value);
+   console.log($('cb34y').value);
+   console.log($('cb35y').value);*/
+
+function calculatescores() {
+   
+   var frm = document.getElementById("fruits");
+   total = frm.querySelectorAll("input[type='radio']:checked");
+   yes=frm.querySelectorAll("input[class='yes']:checked");
+   no=frm.querySelectorAll("input[class='no']:checked");
+   na=frm.querySelectorAll("input[class='na']:checked");
+    total=total.length
+    yes=yes.length;
+    no=no.length;
+    na=na.length;
+       //console.log(total);
+       //console.log(yes);
+       //console.log(no);
+       //console.log(na);
+       newtotal=total-na;
+       qs=parseFloat((yes/newtotal)*100);
+      $("qs").value=qs.toFixed(2);
+
+      var  yntotal=0;
+      y=frm.querySelectorAll("input[class='yes']:checked");
+      n=frm.querySelectorAll("input[class='no']:checked");
+      
+      //console.log(y.length);
+      //console.log(yes);
+      //console.log(n.value);
+      for(i=0;i<y.length;i++){
+         yntotal= parseInt(yntotal) + parseInt(y[i].value);
+         ytotal=yntotal;
+      }
+      
+     for(j=0;j<n.length;j++){
+         yntotal=parseInt(yntotal)+parseInt(n[j].value);
+
+      }
+      //console.log(ytotal);
+      //console.log(yntotal);
+      ws=parseFloat((ytotal/yntotal)*100);
+      $("ws").value=ws.toFixed(2);
+      as=((ws+ws+qs)/3);
+      $("as").value=as.toFixed(2);
+};
+
+</script>
+
+
+
+</html>

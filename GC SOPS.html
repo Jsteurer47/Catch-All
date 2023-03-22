@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>GC SOPs</title>
+        <link rel="stylesheet" href="style.css">
+    </header>
+<body>
+    <main>
+<h1>GC SOPs</h1>
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("mytable");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    </script>
+
+<!--<h3>Current SOP's</h3>-->
+<div class="tbl" >
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for SOP's..">
+<table id="mytable">
+<tr>
+    <th>Process</th>
+    <th>Link to SOP</th>
+    <th></th>
+</tr>
+<tr>
+    <td>Commission Payment</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Commission Payments.docx" class="gc" open>Commission Payment SOP</a></td>
+ </tr>   
+ <tr>
+    <td>Daily Exception Report</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Expeditor's Daily Exception Report.docx" class="gc" open>Daily Exception Report SOP</a></td>
+ </tr> 
+ <tr>
+    <td>Daily Tasks</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Global Compliance Daily Tasks.docx" class="gc" open>Daily Tasks SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Email Inbox Process</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Global Compliance Email Inbox Process.docx" class="gc" open>Email Inbox Process SOP</a></td>
+ </tr>  
+ <tr>
+    <td>GC TC Dashboard</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Global Trade Compliance Dashboard.docx" class="gc" open>GC TC Dashboard SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Original Documents</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Origianl Documents- MBs and OBLs.docx" class="gc" open>Original Documents SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Outstanding Balances</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Oustanding Balances.docx" class="gc" open>Outstanding Balances SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Receiving Discrepancy Audit</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Splitting HouseBill Numbers.docx" class="gc" open>Receiving Discrepancy Audit SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Splitting Housebills</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Splitting HouseBill Numbers.docx" class="gc" open>Splitting Housebills SOP</a></td>
+ </tr>  
+ <tr>
+    <td>Verifying Banking Info</td>
+    <td><a href="\\Page\Data\Global_Compliance\Groups\E Renae\CURRENT SOP.DLSOP\Completed SOPs\DLSOP Verifying Banking Information during Document Review.docx" class="gc" open>Verifying Banking Info SOP</a></td>
+ </tr>  
+
+</table>
+</div>
+
+
+
+</main>
+</body>
+
+<footer><i><a href="Home.html">Return Home</a></i>
+<i><a href="GlobalCompliance.html">Return to GC Home</a></i><br>
+</footer>
+</html>

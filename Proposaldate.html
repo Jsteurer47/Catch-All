@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">	
+    <title>Proposal Date</title>
+    <link rel="stylesheet" href="ppdate.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="build/date.js"></script>
+
+    <script>
+                var $ = function(id) {
+            return document.getElementById(id); };
+
+// dates below are all the four day/bank holidays/ and cb holidays this is what should be updated yearly. ONLY UPDATE BETWEEN THE LINES
+       /* function processEntries(){
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const oneday=['05/30/2022','07/04/2022','09/05/2022','11/24/2022','12/26/2022','12/23/2022','01/02/2023',
+            '04/15/2022','05/27/2022','06/10/2022','07/01/2022','07/22/2022','08/12/2022','09/02/2022','01/17/2022','02/21/2022','06/20/2022',
+            '10/10/2022','11/11/2022','12/25/2022'];
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //these variables allow for the entered cob date to pass into the function to be calculated each variable passes into the corresponding function
+            var cob1= new Date($("cob").value);//15 days
+            var cob2= new Date($("cob").value);//30 days
+            var cob3= new Date($("cob").value);//45 days
+            var cob4= new Date($("cob").value);//60 days
+
+            2/4/22 +15= 2/19/22 which is saturday so should be 2/18/22
+//15 days from cob date calculated                
+                cob15=cob1.setDate(cob1.getDate() + 15); //number  of days to add, e.x. 15 days//
+                var dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+            console.log(cb15);
+            for(i=0;i<oneday.length;i++){
+                
+                if(dw15==="Sat"){
+                    cob15=cob1.setDate(cob1.getDate() -1);
+                    dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw15==="Sun"){
+                        cob15=cob1.setDate(cob1.getDate() -2);
+                        dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb15===oneday[i]){
+                        cob15=cob1.setDate(cob1.getDate() -1);
+                        dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+ //30 days from cob date calculated            
+                cob30=cob2.setDate(cob2.getDate() + 30); //number  of days to add, e.x. 15 days
+                var dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw30==="Sat"){
+                    cob30=cob2.setDate(cob2.getDate() -1);
+                    dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw30==="Sun"){
+                        cob30=cob2.setDate(cob2.getDate() -2);
+                        dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb30===oneday[i]){
+                        cob30=cob2.setDate(cob2.getDate() -1);
+                        dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+//45 days from cob date calculated
+                cob45=cob3.setDate(cob3.getDate() + 45); //number  of days to add, e.x. 15 days
+                var dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw45==="Sat"){
+                    cob45=cob3.setDate(cob3.getDate() -1);
+                    dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw45==="Sun"){
+                        cob45=cob3.setDate(cob3.getDate() -2);
+                        dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb45===oneday[i]){
+                        cob45=cob3.setDate(cob3.getDate() -1);
+                        dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+//60 days from cob date calculated
+                cob60=cob4.setDate(cob4.getDate() + 60); //number  of days to add, e.x. 15 days
+                var dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw60==="Sat"){
+                    cob60=cob4.setDate(cob4.getDate() -1);
+                    dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw60==="Sun"){
+                        cob60=cob4.setDate(cob4.getDate() -2);
+                        dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb60===oneday[i]){
+                        cob60=cob4.setDate(cob4.getDate() -1);
+                        dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+
+
+//places values within the text boxes
+
+                $("fifteen").value=cb15; $("fifdow").value=dw15;
+                $("thirty").value=cb30; $("tdow").value=dw30;
+                $("fortyfive").value=cb45;$("ffdow").value=dw45;
+                $("sixty").value=cb60;$("sdow").value=dw60;
+            //console.log(cb15);
+         };*/
+//clear button function just erases the cob date that was typed 
+        var clearentries=function(){
+            $("cob").value="";
+            $("fifteen").value="";
+            $("thirty").value="";
+            $("fortyfive").value="";
+            $("sixty").value="";
+
+
+        };
+        //allows buttons to process the functions also allows the entry to be type right away with the focus statement as soon as the page loads.
+        window.onload = function() {
+            //$("calculate").onclick = processEntries;
+            $("clear").onclick=clearentries;
+            $("cob").focus();
+        };
+
+
+        //below section copies the calculated date 
+function copy15() {navigator.clipboard.writeText($("fifteen").value);};
+function copy30() {navigator.clipboard.writeText($("thirty").value);};
+function copy45() {navigator.clipboard.writeText($("fortyfive").value);};
+function copy60() {navigator.clipboard.writeText($("sixty").value);};
+
+
+
+
+    </script>
+
+</head>
+<body>
+    <main>
+        <h1>Proposal Date</h1>
+        <form id="form1" method="post" action="" onSubmit="savecomment();">
+        <label for="cob">COB Date:</label>
+		<input type="text"  id="cob"><br>
+
+        <label for="15">15 Days:</label>
+        <input type="text" id="fifteen" disabled><input type="text" id="fifdow" disabled>
+        <button onclick="copy15()">Copy</button><br>
+
+        <label for="30">30 Days:</label>
+        <input type="text" id="thirty" disabled><input type="text" id="tdow" disabled>
+        <button onclick="copy30()">Copy</button><br>
+
+        <label for="45">45 Days:</label>
+        <input type="text" id="fortyfive" disabled><input type="text" id="ffdow" disabled>
+        <button onclick="copy45()">Copy</button><br>
+
+        <label for="60">60 Days:</label>
+        <input type="text" id="sixty" disabled><input type="text" id="sdow" disabled>
+        <button onclick="copy60()">Copy</button><br>
+    
+        <label>&nbsp;</label>
+        <input type="button" id="calculate" onclick="processEntries()" value="Calculate"><br>
+        <label>&nbsp;</label>
+        <input type="button" id="clear" value="Clear Entries"><br>
+        
+    </form>
+
+    </main>
+    
+
+</body>
+<script>
+   
+function processEntries(){
+    //2023 dates:'04/07/2023','05/26/2023','06/09/2023','07/03/2023','07/21/2023','08/11/2023','09/01/2023','05/29/2023','07/04/2023','09/04/2023','11/23/2023','12/22/2023','12/25/2023','01/01/2024'
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            const oneday=['05/30/2022','07/04/2022','09/05/2022','11/24/2022','12/26/2022','12/23/2022','01/02/2023',
+            '04/15/2022','05/27/2022','06/10/2022','07/01/2022','07/22/2022','08/12/2022','09/02/2022','01/17/2022','02/21/2022','06/20/2022',
+            '10/10/2022','11/11/2022','12/25/2022','04/07/2023','05/26/2023','06/09/2023','07/03/2023','07/21/2023','08/11/2023','09/01/2023',
+            '05/29/2023','07/04/2023','09/04/2023','11/23/2023','12/22/2023','12/25/2023','01/01/2024'];
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //these variables allow for the entered cob date to pass into the function to be calculated each variable passes into the corresponding function
+            var cob1= new Date($("cob").value);//15 days
+            var cob2= new Date($("cob").value);//30 days
+            var cob3= new Date($("cob").value);//45 days
+            var cob4= new Date($("cob").value);//60 days
+
+            /*2/4/22 +15= 2/19/22 which is saturday so should be 2/18/22*/
+//15 days from cob date calculated                
+                cob15=cob1.setDate(cob1.getDate() + 15); //number  of days to add, e.x. 15 days//
+                var dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+            //console.log(cb15);
+            for(i=0;i<oneday.length;i++){
+                
+                if(dw15==="Sat"){
+                    cob15=cob1.setDate(cob1.getDate() -1);
+                    dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw15==="Sun"){
+                        cob15=cob1.setDate(cob1.getDate() -2);
+                        dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb15===oneday[i]){
+                        cob15=cob1.setDate(cob1.getDate() -1);
+                        dw15=cob1.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb15 = cob1.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+ //30 days from cob date calculated            
+                cob30=cob2.setDate(cob2.getDate() + 30); //number  of days to add, e.x. 15 days
+                var dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw30==="Sat"){
+                    cob30=cob2.setDate(cob2.getDate() -1);
+                    dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw30==="Sun"){
+                        cob30=cob2.setDate(cob2.getDate() -2);
+                        dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb30===oneday[i]){
+                        cob30=cob2.setDate(cob2.getDate() -1);
+                        dw30=cob2.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb30 = cob2.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+//45 days from cob date calculated
+                cob45=cob3.setDate(cob3.getDate() + 45); //number  of days to add, e.x. 15 days
+                var dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw45==="Sat"){
+                    cob45=cob3.setDate(cob3.getDate() -1);
+                    dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw45==="Sun"){
+                        cob45=cob3.setDate(cob3.getDate() -2);
+                        dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb45===oneday[i]){
+                        cob45=cob3.setDate(cob3.getDate() -1);
+                        dw45=cob3.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb45 = cob3.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+//60 days from cob date calculated
+                cob60=cob4.setDate(cob4.getDate() + 60); //number  of days to add, e.x. 15 days
+                var dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                var cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                for(i=0;i<oneday.length;i++){
+                
+                if(dw60==="Sat"){
+                    cob60=cob4.setDate(cob4.getDate() -1);
+                    dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if(dw60==="Sun"){
+                        cob60=cob4.setDate(cob4.getDate() -2);
+                        dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                    } else if (cb60===oneday[i]){
+                        cob60=cob4.setDate(cob4.getDate() -1);
+                        dw60=cob4.toLocaleDateString('en-US',{weekday: 'short'});
+                    cb60 = cob4.toLocaleDateString('en-US', {year: 'numeric', month: '2-digit', day: '2-digit'}).substr(0,10);
+                }
+                
+            }
+
+//places values within the text boxes
+
+                $("fifteen").value=cb15; $("fifdow").value=dw15;
+                $("thirty").value=cb30; $("tdow").value=dw30;
+                $("fortyfive").value=cb45;$("ffdow").value=dw45;
+                $("sixty").value=cb60;$("sdow").value=dw60;
+    };
+
+
+
+    document.getElementById("cob").value = sessionStorage.getItem("f1");
+    document.getElementById("fifteen").value = sessionStorage.getItem("f2");
+    document.getElementById("thirty").value = sessionStorage.getItem("f3");
+    document.getElementById("fortyfive").value = sessionStorage.getItem("f4");
+    document.getElementById("sixty").value = sessionStorage.getItem("f5");
+    function savecomment() {
+    var f1 = document.getElementById("cob").value;
+    var f2= document.getElementById("fifteen").value;
+    var f3= document.getElementById("thirty").value;
+    var f4= document.getElementById("fortyfive").value;
+    var f5= document.getElementById("sixty").value;
+    if (f1 == "") {
+        //alert("Please enter a comment in first!");
+        return false;
+    }
+
+    sessionStorage.setItem("f1", f1);
+    sessionStorage.setItem("f2", f2);
+    sessionStorage.setItem("f3", f3);
+    sessionStorage.setItem("f4", f4);
+    sessionStorage.setItem("f5", f5);
+    //alert("Your comment has been saved!");
+    //console.log(comment)
+    //location.reload();
+    return false;
+    //return true;
+}
+
+
+
+</script>
+<footer><a href="globalcompliance.html"class="l">Global Compliance</a></footer>
+</html>
